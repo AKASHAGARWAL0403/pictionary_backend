@@ -12,4 +12,14 @@ router.post("/" , (req,res) => {
     })
 })
 
+router.post('/add-user', (req,res) => {
+    RoomAction.addUserToRoom(req.body , (err , result) => {
+        if(err){
+            res.status(err.status).send(err);
+        }else{
+            res.status(200).send(result);
+        }
+    })
+})
+
 module.exports = router;
