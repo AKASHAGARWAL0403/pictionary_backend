@@ -27,11 +27,12 @@ export const initRoom = async (sequelize) => {
       },
       host_id: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
           model: User,
           key: "id",
           deferrable: Deferrable.INITIALLY_IMMEDIATE,
-        },
+        }
       },
     },
     {
