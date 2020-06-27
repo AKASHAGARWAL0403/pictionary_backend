@@ -6,6 +6,7 @@ import { initWord } from './models/Word';
 import express from 'express';
 import bodyParser from 'body-parser';
 import UserRouter  from './api/User/router';
+import RoomRouter from './api/Room/router';
 
 import { addRelation } from './models/Relation';
 (async () => {
@@ -30,7 +31,8 @@ import { addRelation } from './models/Relation';
   app.use(bodyParser.json({ extended: false }));
 
   app.use('/user' , UserRouter);
-
+  app.use('/room' , RoomRouter);
+  
   app.listen(5000 , () => {
       console.log("Listening to port 5000");
   })
