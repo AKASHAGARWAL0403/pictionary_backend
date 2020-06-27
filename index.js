@@ -3,6 +3,9 @@ import { initRoom } from './models/Room';
 import { initUser } from './models/User';
 import { initRoomUser } from './models/RoomUser';
 import { initWord } from './models/Word';
+import express from 'express';
+import bodyParser from 'body-parser';
+import UserRouter  from './api/User/router';
 
 import { addRelation } from './models/Relation';
 (async () => {
@@ -17,9 +20,19 @@ import { addRelation } from './models/Relation';
   await initRoom(sequelize);
   await initRoomUser(sequelize);
   await initWord(sequelize);
-  
+
   addRelation();
 
   await syncDatabase();
+
+  const app = express();
+
+  app.use(bodyParser.json({ extended: false }));
+
+  app.use('/user' , UserRouter);
+
+  app.listen(5000 , () => {
+      console.log("Listening to port 5000");
+  })
 
 })();

@@ -32,5 +32,5 @@ export const getSequelize = () => {
 }
 
 export const syncDatabase = async () => {
-    await state.sequelize.sync({ force: true });
+    await state.sequelize.sync({ force: false });
 }
