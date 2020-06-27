@@ -6,6 +6,7 @@ const {
   dbPort,
   dbUsername,
 } = require("./DatabaseDetails");
+import {Database} from "./Database";
 
 var state = {
     sequelize : ""
@@ -17,7 +18,6 @@ export const Connect = async (callback) => {
         port: dbPort,
         dialect: "mysql",
       });
-    
     try {
         await sequelize.authenticate();
         state.sequelize = sequelize;
@@ -33,4 +33,8 @@ export const getSequelize = () => {
 
 export const syncDatabase = async () => {
     await state.sequelize.sync({ force: false });
+}
+
+export const getTransaction = async () => {
+    await Database.getSequelize().transaction();
 }

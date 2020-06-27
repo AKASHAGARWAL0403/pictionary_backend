@@ -7,6 +7,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import UserRouter  from './api/User/router';
 import RoomRouter from './api/Room/router';
+import { Database } from './db/Database';
 
 import { addRelation } from './models/Relation';
 (async () => {
@@ -16,6 +17,8 @@ import { addRelation } from './models/Relation';
   });
 
   const sequelize = getSequelize();
+  Database.setSequelize(sequelize);
+//   console.log(Database.getSequelize());
 
   await initUser(sequelize);
   await initRoom(sequelize);
